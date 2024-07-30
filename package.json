@@ -1,6 +1,8 @@
 {
-  "name": "nuxt-app",
+  "name": "integrated-management-platform",
   "private": true,
+  "author": "Edward Brock",
+  "license": "AGPL-3.0",
   "type": "module",
   "scripts": {
     "build": "nuxt build",
