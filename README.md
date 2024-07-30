@@ -1,6 +1,6 @@
-# Nuxt 3 Minimal Starter
+# Integrated Management Platform
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+综合管理平台（Integrated Management Platform，IMP）使用 [Nuxt 3](https://nuxt.com/) 进行开发
 
 ## Setup
 
@@ -72,4 +72,11 @@ yarn preview
 bun run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## 与我联系
+
+- 开发者 - [Edward Brock](https://github.com/Edward-Brock)
+- 网站 - [https://booop.net](https://booop.net/)
+
+## 许可证
+
+综合管理平台使用 [AGPL-3.0](LICENSE) 许可证
