@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div>Home</div>
+  <UContainer>Home</UContainer>
 </template>
 
 <style scoped>
