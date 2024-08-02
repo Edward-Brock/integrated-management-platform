@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// 用户性别
+enum Gender {
+  Male
+  Female
+  Other
+  Unknown
+}
+
+// 用户状态
+enum UserStatus {
+  Active // 活跃
+  Banned // 封禁：账号违反相关规定，管理员将禁止该账号的使用
+  Locked // 锁定：系统出于保护该账号将禁止登录一段时间
+  Inactive // 注销
+}
+
+// 用户表
+model User {
+  id        String     @id @default(cuid())
+  username  String     @unique() @db.VarChar(32) // 用户名
+  nickname  String     @db.VarChar(80) // 昵称
+  password  String
+  email     String?    @unique()
+  mobile    String?    @unique()
+  avatarUrl String?    @db.Text
+  gender    Gender     @default(Unknown)
+  status    UserStatus @default(Active)
+  remark    String?
+  isFixed   Boolean    @default(false) // 固定用户
+  isDeleted Boolean    @default(false)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  roles     UserRole[]
+}
+
+// 角色表
+model Role {
+  id          String           @id @default(cuid())
+  name        String           @unique()
+  remark      String?
+  isFixed     Boolean          @default(false) // 固定角色
+  isDeleted   Boolean          @default(false)
+  users       UserRole[]
+  permissions RolePermission[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+}
+
+// 用户角色关联表
+model UserRole {
+  User      User     @relation(fields: [userId], references: [id])
+  userId    String
+  Role      Role     @relation(fields: [roleId], references: [id])
+  roleId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@id([userId, roleId])
+}
+
+// 权限表
+model Permission {
+  id        String           @id @default(cuid())
+  name      String           @unique()
+  remark    String?
+  isFixed   Boolean          @default(false) // 固定权限
+  isDeleted Boolean          @default(false)
+  roles     RolePermission[]
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+}
+
+// 角色权限关联表
+model RolePermission {
+  Role         Role       @relation(fields: [roleId], references: [id])
+  roleId       String
+  Permission   Permission @relation(fields: [permissionId], references: [id])
+  permissionId String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@id([roleId, permissionId])
+}
