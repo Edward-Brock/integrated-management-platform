@@ -1,20 +1,28 @@
 <script setup lang="ts">
+import UserDropdown from '../UserDropdown.vue'
+
+const { status } = useAuth()
+const projectName = useRuntimeConfig().public.projectName as string
+const projectFullName = useRuntimeConfig().public.projectFullName as string
 </script>
 
 <template>
   <UContainer class="h-16 flex flex-row items-center justify-between gap-3">
     <div>
       <UTooltip
-        text="综合管理平台（Integrated Management Platform）"
+        :text="projectFullName"
         :popper="{ placement: 'bottom-end' }"
       >
-        IMP
+        {{ projectName }}
       </UTooltip>
     </div>
 
     <div class="flex flex-col flex-wrap items-center justify-center">
       <!-- 注册/登录区域 -->
-      <div class="flex flex-wrap items-center justify-center">
+      <div
+        v-if="status==='unauthenticated'"
+        class="flex flex-wrap items-center justify-center"
+      >
         <UButton
           size="md"
           color="gray"
@@ -40,6 +48,11 @@
           </template>
           登录
         </UButton>
+      </div>
+
+      <!-- 用户下拉信息区域 -->
+      <div v-else-if="status==='authenticated'">
+        <UserDropdown />
       </div>
     </div>
   </UContainer>
