@@ -20,6 +20,7 @@
           color="gray"
           variant="solid"
           :ui="{ rounded: 'rounded-full' }"
+          to="/signup"
         >
           注册
         </UButton>
@@ -29,6 +30,7 @@
           size="md"
           variant="solid"
           :ui="{ rounded: 'rounded-full' }"
+          to="/login"
         >
           <template #trailing>
             <UIcon
