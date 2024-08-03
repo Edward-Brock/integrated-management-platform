@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@iconify-json/heroicons": "^1.1.23",
+    "@iconify-json/mdi": "^1.1.67",
     "@nuxt/eslint": "^0.4.0",
     "@sidebase/nuxt-auth": "^0.8.1",
     "eslint": "^9.8.0",

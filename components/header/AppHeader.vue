@@ -2,8 +2,8 @@
 import UserDropdown from '../UserDropdown.vue'
 
 const { status } = useAuth()
-const projectName = useRuntimeConfig().public.projectName as string
-const projectFullName = useRuntimeConfig().public.projectFullName as string
+const projectName = useRuntimeConfig().public.projectName
+const projectFullName = useRuntimeConfig().public.projectFullName
 </script>
 
 <template>
@@ -13,7 +13,9 @@ const projectFullName = useRuntimeConfig().public.projectFullName as string
         :text="projectFullName"
         :popper="{ placement: 'bottom-end' }"
       >
-        {{ projectName }}
+        <ULink to="/">
+          {{ projectName }}
+        </ULink>
       </UTooltip>
     </div>
 
